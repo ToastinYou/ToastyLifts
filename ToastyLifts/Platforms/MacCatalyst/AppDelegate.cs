@@ -1,10 +1,12 @@
 ﻿using Foundation;
 
-namespace ToastyLifts
+namespace ToastyLifts.Platforms.MacCatalyst;
+
+[Register(nameof(AppDelegate))]
+public class AppDelegate : MauiUIApplicationDelegate
 {
-    [Register("AppDelegate")]
-    public class AppDelegate : MauiUIApplicationDelegate
+    protected override MauiApp CreateMauiApp()
     {
-        protected override MauiApp CreateMauiApp() => MauiProgram.CreateMauiApp();
+        return MauiProgram.CreateMauiApp();
     }
 }

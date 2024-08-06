@@ -1,29 +1,21 @@
 ﻿using ToastyLifts.ViewModels;
 
-namespace ToastyLifts.Views
+namespace ToastyLifts.Views;
+
+public partial class MainPage : ContentPage
 {
-    public partial class MainPage : ContentPage
+    private int count = 0;
+
+    public MainPage(MainViewModel viewModel)
     {
-        int count = 0;
-
-        public MainPage(MainViewModel viewModel)
-        {
-            InitializeComponent();
-
-            BindingContext = viewModel;
-        }
-
-        private void OnCounterClicked(object sender, EventArgs e)
-        {
-            count++;
-
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
-            else
-                CounterBtn.Text = $"Clicked {count} times";
-
-            SemanticScreenReader.Announce(CounterBtn.Text);
-        }
+        InitializeComponent();
+        BindingContext = viewModel;
     }
 
+    private void OnCounterClicked(object sender, EventArgs e)
+    {
+        count++;
+        CounterBtn.Text = $"Clicked {count} {(count is 1 ? "time" : "times")}";
+        SemanticScreenReader.Announce(CounterBtn.Text);
+    }
 }

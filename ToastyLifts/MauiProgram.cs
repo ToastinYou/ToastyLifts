@@ -3,14 +3,13 @@ using ToastyLifts.Interfaces;
 using ToastyLifts.Services;
 using ToastyLifts.ViewModels;
 
-namespace ToastyLifts
-{
+namespace ToastyLifts;
+
     public static class MauiProgram
     {
         public static MauiApp CreateMauiApp()
         {
-            var builder = MauiApp.CreateBuilder();
-            builder
+        MauiAppBuilder builder = MauiApp.CreateBuilder()
                 .UseMauiApp<App>()
                 .ConfigureFonts(fonts =>
                 {
@@ -18,7 +17,7 @@ namespace ToastyLifts
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
-            builder.Services.RegisterServices();
+        builder.Services.Register();
 
 #if DEBUG
     		builder.Logging.AddDebug();
@@ -28,10 +27,10 @@ namespace ToastyLifts
         }
 
         /// <summary>
-        /// Adds the applications services and view models to the specified service collection.
+    /// Adds the application's services, view models, and views to the specified service collection.
         /// </summary>
         /// <param name="services">The application's <see cref="IServiceCollection"/>.</param>
-        private static void RegisterServices(this IServiceCollection services)
+    private static void Register(this IServiceCollection services)
         {
             // Services
             services.AddSingleton<IDatabaseService, DatabaseService>();
@@ -40,4 +39,3 @@ namespace ToastyLifts
             services.AddTransient<MainViewModel>();
         }
     }
-}
