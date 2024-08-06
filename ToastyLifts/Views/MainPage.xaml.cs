@@ -1,12 +1,16 @@
-﻿namespace ToastyLifts
+﻿using ToastyLifts.ViewModels;
+
+namespace ToastyLifts.Views
 {
     public partial class MainPage : ContentPage
     {
         int count = 0;
 
-        public MainPage()
+        public MainPage(MainViewModel viewModel)
         {
             InitializeComponent();
+
+            BindingContext = viewModel;
         }
 
         private void OnCounterClicked(object sender, EventArgs e)

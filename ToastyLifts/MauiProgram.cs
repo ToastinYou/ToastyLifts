@@ -1,4 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
+using ToastyLifts.Interfaces;
+using ToastyLifts.Services;
+using ToastyLifts.ViewModels;
 
 namespace ToastyLifts
 {
@@ -15,11 +18,26 @@ namespace ToastyLifts
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
+            builder.Services.RegisterServices();
+
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
 
             return builder.Build();
+        }
+
+        /// <summary>
+        /// Adds the applications services and view models to the specified service collection.
+        /// </summary>
+        /// <param name="services">The application's <see cref="IServiceCollection"/>.</param>
+        private static void RegisterServices(this IServiceCollection services)
+        {
+            // Services
+            services.AddSingleton<IDatabaseService, DatabaseService>();
+
+            // View Models
+            services.AddTransient<MainViewModel>();
         }
     }
 }
